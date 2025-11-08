@@ -35,7 +35,6 @@ To run the System Monitor Tool, use the command:
   - **MEM%** — Memory percentage
 
 - **Sorting options:**  
-  - Press **`p`** → Sort processes by **PID** (ascending order)  
   - Press **`c`** → Sort processes by **CPU usage** (available mode)  
   - Press **`m`** → Sort processes by **Memory usage** (descending order)
 
@@ -53,5 +52,8 @@ To run the System Monitor Tool, use the command:
 
 ### Screenshots
 
+<img width="1715" height="835" alt="pic" src="https://github.com/user-attachments/assets/526ce9ca-bb2f-4eae-91b6-f6622efd85ea" />
 
-<img width="1715" height="835" alt="pic" src="https://github.com/user-attachments/assets/a416bbe7-5308-4673-98a9-c1005d5811c0" />
+
+
+
