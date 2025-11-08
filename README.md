@@ -14,3 +14,9 @@ This project was created to understand **process handling**, **system calls**, a
 To build the project, simply open your terminal in the project folder and type:
 ```bash
 make
+```
+###▶️ Run the program
+To run the System Monitor Tool, use the command:
+```bash
+./system_monitor_tool
+```
