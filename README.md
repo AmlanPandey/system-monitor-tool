@@ -51,4 +51,6 @@ To run the System Monitor Tool, use the command:
 - **Auto-refresh:**  
   The display automatically refreshes every second to show the latest process and system data.
 
+### Screenshots
 
+<img width="1714" height="850" alt="Screenshot (275)" src="https://github.com/user-attachments/assets/459e383d-e156-4349-a7d4-d77db241c2a3" />
