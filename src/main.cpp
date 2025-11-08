@@ -149,7 +149,6 @@ int main() {
         int ch = getch();
 
         switch (ch) {
-            case 'p': case 'P': sortMode = 0; break;
             case 'c': case 'C': sortMode = 1; break;
             case 'm': case 'M': sortMode = 2; break;
             case KEY_UP: if (highlight > 0) --highlight; break;
