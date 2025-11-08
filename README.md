@@ -1,6 +1,6 @@
 # System Monitor Tool
 
-## 1. Overview
+##  Overview
 The **System Monitor Tool** is a simple Linux-based project written in **C++** that displays real-time system information such as CPU usage, memory usage, and active processes.  
 It runs inside the terminal using the **ncurses** library, similar to the `top` command in Linux.
 
@@ -8,7 +8,7 @@ This project was created to understand **process handling**, **system calls**, a
 
 ---
 
-## 2. Build & Run
+##  Build & Run
 
 ### 🛠️ Build the project
 To build the project, simply open your terminal in the project folder and type:
@@ -20,3 +20,35 @@ To run the System Monitor Tool, use the command:
 ```bash
 ./system_monitor_tool
 ```
+
+### ⚙️ Features 
+
+- **Displays system information:**  
+  Shows real-time **uptime**, **total memory**, **available memory**, and **used memory**.
+
+- **Process list:**  
+  Displays all active processes along with:
+  - **PID** — Process ID  
+  - **USER** — Process owner  
+  - **STATE** — Running, Sleeping, etc.  
+  - **MEM(MB)** — Memory used by process  
+  - **MEM%** — Memory percentage
+
+- **Sorting options:**  
+  - Press **`p`** → Sort processes by **PID** (ascending order)  
+  - Press **`c`** → Sort processes by **CPU usage** (available mode)  
+  - Press **`m`** → Sort processes by **Memory usage** (descending order)
+
+- **Navigation:**  
+  - Use **`ARROW_UP`** and **`ARROW_DOWN`** keys to move the highlight between processes
+
+- **Terminate a process:**  
+  - Press **`k`** → Kill the selected process (sends `SIGTERM`, and if it fails, `SIGKILL`)
+
+- **Quit the program:**  
+  - Press **`q`** → Exit the System Monitor Tool
+
+- **Auto-refresh:**  
+  The display automatically refreshes every second to show the latest process and system data.
+
+
