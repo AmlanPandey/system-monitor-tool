@@ -89,7 +89,7 @@ void renderProcessList(const vector<ProcDetails>& procs, int startRow, int highl
 
 void renderFooter() {
     mvhline(LINES - 4, 1, '-', COLS - 2);
-   mvprintw(LINES - 3, 0, "Sort: [P]ID | [C]PU | [M]em   Navigate: ARROW_UP / ARROW_DOWN   [K]ill   [Q]uit");
+   mvprintw(LINES - 3, 0, "Sort:[C]PU | [M]em   Navigate: ARROW_UP / ARROW_DOWN   [K]ill   [Q]uit");
 
 }
 
