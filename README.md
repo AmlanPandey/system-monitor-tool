@@ -53,4 +53,5 @@ To run the System Monitor Tool, use the command:
 
 ### Screenshots
 
-<img width="1714" height="850" alt="Screenshot (275)" src="https://github.com/user-attachments/assets/459e383d-e156-4349-a7d4-d77db241c2a3" />
+
+<img width="1715" height="835" alt="pic" src="https://github.com/user-attachments/assets/a416bbe7-5308-4673-98a9-c1005d5811c0" />
