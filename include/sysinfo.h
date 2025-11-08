@@ -1,5 +1,5 @@
-#ifndef SYSTEM_INFO_H
-#define SYSTEM_INFO_H
+#ifndef SYSINFO_H
+#define SYSINFO_H
 
 #include <string>
 #include <vector>
