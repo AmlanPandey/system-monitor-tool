@@ -179,17 +179,13 @@ string findProcessUser(int pid) {
     return "unknown";
 }
 
-void sortProcList(vector<ProcDetails>& list, int mode) {
-    if (mode == 0) {
-        sort(list.begin(), list.end(), [](const ProcDetails& a, const ProcDetails& b){
-            return a.pid < b.pid;
-        });
-    } else if (mode == 1) {
-        sort(list.begin(), list.end(), [](const ProcDetails& a, const ProcDetails& b){
+void sortProcList(std::vector<ProcDetails>& list, int mode) {
+    if (mode == 1) { 
+        std::sort(list.begin(), list.end(), [](const ProcDetails& a, const ProcDetails& b){
             return a.cpuPercent > b.cpuPercent;
         });
     } else { 
-        sort(list.begin(), list.end(), [](const ProcDetails& a, const ProcDetails& b){
+        std::sort(list.begin(), list.end(), [](const ProcDetails& a, const ProcDetails& b){
             return a.memUsageKB > b.memUsageKB;
         });
     }
