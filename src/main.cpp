@@ -1,6 +1,6 @@
 
 
-#include "system_info.h"
+#include "sysinfo.h"
 #include <ncurses.h>
 #include <unistd.h>
 #include <csignal>
