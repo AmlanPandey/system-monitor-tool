@@ -15,26 +15,23 @@
 using namespace std;
 
 ProcessorStats fetchCPUStats() {
-    ProcessorStats stats{};
-    stats.user = stats.nice = stats.system = stats.idle = 0;
-    stats.total = stats.active = 0;
+    ProcessorStats cpu{};
+    ifstream file("/proc/stat");
+    if (!file.is_open()) return cpu;
 
-    ifstream f("/proc/stat");
-    if (!f.is_open()) return stats;
+    string label;
+    file >> label; 
+    if (label != "cpu") return cpu;
 
-    string line;
-    if (getline(f, line)) {
-        istringstream ss(line);
-        string label;
-        ss >> label; 
-        if (label == "cpu") {
-            ss >> stats.user >> stats.nice >> stats.system >> stats.idle;
-            stats.active = stats.user + stats.nice + stats.system;
-            stats.total = stats.active + stats.idle;
-        }
-    }
-    return stats;
+    file >> cpu.user >> cpu.nice >> cpu.system >> cpu.idle;
+
+   
+    cpu.active = cpu.user + cpu.nice + cpu.system;
+    cpu.total = cpu.active + cpu.idle;
+
+    return cpu;
 }
+
 
 MemStats fetchMemoryInfo() {
     MemStats m{};
@@ -69,33 +66,24 @@ double getUptime() {
 
 vector<int> findAllPIDs() {
     vector<int> pids;
-    DIR* d = opendir("/proc");
-    if (!d) return pids;
+    DIR* dir = opendir("/proc");
+    if (!dir) return pids;
 
     struct dirent* entry;
-    while ((entry = readdir(d)) != nullptr) {
-        if (entry->d_type == DT_DIR) continue; 
-       
-    }
-    closedir(d);
-
-   
-    d = opendir("/proc");
-    if (!d) return pids;
-    while ((entry = readdir(d)) != nullptr) {
+    while ((entry = readdir(dir)) != nullptr) {
         string name = entry->d_name;
-        bool allDigits = !name.empty() && (find_if(name.begin(), name.end(),
-                      [](char c){ return !isdigit(c); }) == name.end());
-        if (allDigits) {
-            int pid = atoi(name.c_str());
-            if (pid > 0) pids.push_back(pid);
+
+        
+        if (!name.empty() && all_of(name.begin(), name.end(), ::isdigit)) {
+            pids.push_back(stoi(name));
         }
     }
-    closedir(d);
-  
+
+    closedir(dir);
     sort(pids.begin(), pids.end());
     return pids;
 }
+
 
 ProcDetails fetchProcessDetails(int pid) {
     ProcDetails proc;
@@ -157,26 +145,24 @@ ProcDetails fetchProcessDetails(int pid) {
 
 
 string findProcessUser(int pid) {
-    string statusPath = "/proc/" + to_string(pid) + "/status";
-    ifstream f(statusPath);
-    if (!f.is_open()) return "unknown";
+    char statusPath[256];
+    snprintf(statusPath, sizeof(statusPath), "/proc/%d/status", pid);
 
-    string line;
-    while (getline(f, line)) {
-        istringstream ss(line);
-        string key;
-        ss >> key;
-        if (key == "Uid:") {
-            int uid = -1;
-            ss >> uid;
-            if (uid >= 0) {
+    FILE* file = fopen(statusPath, "r");
+    if (file) {
+        char line[256];
+        while (fgets(line, sizeof(line), file)) {
+            int uid;
+            if (sscanf(line, "Uid:\t%d", &uid) == 1) {
+                fclose(file);
                 struct passwd* pw = getpwuid(uid);
-                if (pw) return string(pw->pw_name);
+                return pw ? pw->pw_name : "unknown";
             }
-            break;
         }
+        fclose(file);
     }
     return "unknown";
+
 }
 
 void sortProcList(std::vector<ProcDetails>& list, int mode) {
@@ -190,4 +176,3 @@ void sortProcList(std::vector<ProcDetails>& list, int mode) {
         });
     }
 }
-
